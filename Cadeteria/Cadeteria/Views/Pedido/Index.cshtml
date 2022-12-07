@@ -1,0 +1,39 @@
+﻿@{
+	ViewData["Title"] = "Muestra de pedidos";
+}
+@model List<Cadeteria.Models.PedidoModel>;
+
+<div class="text-center">
+	<h1 class="displey-4">Listado de Pedidos</h1>
+	<a class="btn-info btn-success btn-lg" asp-action="IngresaPedido">Ingresar pedido</a>
+	</br>
+	<p>Seleccione entre los @Model.Count() pedidos:</p>
+
+	<table class="table">
+      <thead>
+        <tr>
+          <th scope="col">NroPedido</th>
+          <th scope="col">Observacion</th>
+          <th scope="col">Datos extra dir</th>
+          <th scope="col">Nombre Cliente</th>
+          <th scope="col">Estado</th>
+          <th scope="col"></th>
+        </tr>
+      </thead>
+
+      <tbody>
+          @foreach(var item in Model)
+            {
+                <tr>
+                    <th scope="row">@item.getNroPedido()</th>
+                    <td>@item.getObservacion()</td>
+                    <td>@item.getDatosExtraDireccion()</td>
+                    <td>@item.getCliente().getNombre()</td>
+                    <td>@item.getEstado()</td>
+                    <td><a class="btn-info btn-danger btn-lg" asp-action="">Eliminar Pedido</a></td>
+                </tr>
+            }
+      </tbody>
+    </table>
+</div>
+

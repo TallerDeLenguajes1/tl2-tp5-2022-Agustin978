@@ -1,0 +1,41 @@
+﻿@{
+    ViewData["Title"] = "Pagina de muestra de cadetes";
+}
+@model List<Cadeteria.Models.CadeteModel>;
+
+<div class="text-center">
+	<h1 class="displey-4">Listado de Cadetes</h1>
+	<a class="btn-info btn-success btn-lg" asp-action="IngresaCadete">Ingresar cadete</a>
+	</br>
+	<p>Seleccione entre los @Model.Count() cadetes:</p>
+
+	<table class="table">
+      <thead>
+        <tr>
+          <th scope="col">#</th>
+          <th scope="col">Nombre</th>
+          <th scope="col">Telefono</th>
+          <th scope="col">Direccion</th>
+          <th scope="col">Cantidad Pedidos</th>
+          <th scope="col"></th>
+          <th scope="col"></th>
+        </tr>
+      </thead>
+
+      <tbody>
+          @foreach(var item in Model)
+            {
+                <tr>
+                    <th scope="row">@item.getID()</th>
+                    <td>@item.getNombre()</td>
+                    <td>@item.getTelefono()</td>
+                    <td>@item.getDireccion()</td>
+                    <td>@item.getPedidos().Count()</td>
+                    <td><a class="btn-info btn-success btn-lg" asp-action="">Agregar Pedido</a></td>
+                    <td><a class="btn-info btn-danger btn-lg" asp-action="">Eliminar Cadete</a></td>
+                </tr>
+            }
+      </tbody>
+    </table>
+</div>
+

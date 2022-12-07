@@ -1,0 +1,25 @@
+﻿@{
+	ViewData["Title"] = "Pagina para ingresar pedidos";
+}
+
+<h1 class="text-center">Ingresear un nuevo pedido</h1>
+<form asp-controller="Pedido" asp-action="IngresaPedido" method="POST">
+	<fieldset>
+		<legend>Datos del pedido:</legend>
+		<div class="input-group-sm">Observacion:<input type="text" name="observacion" required></div>
+        <div class="input-group-sm">Datos extra de la direccion:<input type="text" name="datosExtraDireccion" required></div>
+		<div calss="input group-sm">Estado del pedido:
+			<select name="estado">
+				<option value="entregado"selected>Entregado</option>
+				<option value="despachado">Despachado</option>
+				<option value="enProceso">En proceso</option>
+			</select>
+		</div>
+		</br>
+		<legend>Ingrese los datos del cliente:</legend>
+		<div class="input-group-sm">Nombre:<input type="text" name="nombre" required></div>
+        <div class="input-group-sm">Direccion:<input type="text" name="direccion" required></div>
+        <div class="input-group-sm">Telefono:<input type="float" name="telefono" required></div>
+		<div class="input-group-sm"><input type="submit" name="btnSubmit" value="Enviar"><br/><input type="reset" name="btnRestart" value="Borrar"></div>
+	</fieldset>
+</form>
