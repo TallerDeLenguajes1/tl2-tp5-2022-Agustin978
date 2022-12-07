@@ -32,6 +32,8 @@
             //this.pedidos = pedidos;
         }
 
+        public CadeteModel() { }
+
         /*
         public void calculaJornal()
         {
