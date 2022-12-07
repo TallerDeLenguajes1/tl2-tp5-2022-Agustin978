@@ -1,7 +1,7 @@
 ﻿@{
 	ViewData["Title"] = "Muestra de pedidos";
 }
-@model List<Cadeteria.Models.PedidoModel>;
+@model List<Cadeteria.ViewModels.Pedido.PedidoViewModel>;
 
 <div class="text-center">
 	<h1 class="displey-4">Listado de Pedidos</h1>
@@ -25,11 +25,11 @@
           @foreach(var item in Model)
             {
                 <tr>
-                    <th scope="row">@item.getNroPedido()</th>
-                    <td>@item.getObservacion()</td>
-                    <td>@item.getDatosExtraDireccion()</td>
-                    <td>@item.getCliente().getNombre()</td>
-                    <td>@item.getEstado()</td>
+                    <th scope="row">@item.nroPedido</th>
+                    <td>@item.observacion</td>
+                    <td>@item.datosdatosExtraDireccion</td>
+                    <td>@item.cliente.getNombre()</td>
+                    <td>@item.estado</td>
                     <td><a class="btn-info btn-danger btn-lg" asp-action="">Eliminar Pedido</a></td>
                 </tr>
             }

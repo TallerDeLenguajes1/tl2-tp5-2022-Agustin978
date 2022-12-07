@@ -1,7 +1,7 @@
 ﻿@{
     ViewData["Title"] = "Pagina de muestra de cadetes";
 }
-@model List<Cadeteria.Models.CadeteModel>;
+@model List<Cadeteria.ViewModels.Cadete.CadeteViewModel>;
 
 <div class="text-center">
 	<h1 class="displey-4">Listado de Cadetes</h1>
@@ -16,7 +16,6 @@
           <th scope="col">Nombre</th>
           <th scope="col">Telefono</th>
           <th scope="col">Direccion</th>
-          <th scope="col">Cantidad Pedidos</th>
           <th scope="col"></th>
           <th scope="col"></th>
         </tr>
@@ -26,11 +25,10 @@
           @foreach(var item in Model)
             {
                 <tr>
-                    <th scope="row">@item.getID()</th>
-                    <td>@item.getNombre()</td>
-                    <td>@item.getTelefono()</td>
-                    <td>@item.getDireccion()</td>
-                    <td>@item.getPedidos().Count()</td>
+                    <th scope="row">@item.id</th>
+                    <td>@item.nombre</td>
+                    <td>@item.telefono</td>
+                    <td>@item.direccion</td>
                     <td><a class="btn-info btn-success btn-lg" asp-action="">Agregar Pedido</a></td>
                     <td><a class="btn-info btn-danger btn-lg" asp-action="">Eliminar Cadete</a></td>
                 </tr>

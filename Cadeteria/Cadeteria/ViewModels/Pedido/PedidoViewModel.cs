@@ -26,5 +26,7 @@ namespace Cadeteria.ViewModels.Pedido
             this.estado = estado;
             this.cliente = new ClienteModel(nombre,direccion,telefono);
         }
+
+        public PedidoViewModel(){}
     }
 }

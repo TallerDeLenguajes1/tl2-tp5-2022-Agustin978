@@ -1,4 +1,6 @@
-﻿using Cadeteria.Models;
+﻿using AutoMapper;
+using Cadeteria.Models;
+using Cadeteria.ViewModels.Pedido;
 using Microsoft.AspNetCore.Mvc;
 
 namespace Cadeteria.Controllers
@@ -7,15 +9,25 @@ namespace Cadeteria.Controllers
     {
         private static string path = @"C:\Cursos\Programacion_UNT\Taller_de_Lenguajes_2\tl2-tp5-2022-Agustin978\Cadeteria\Cadeteria\Archivos\pedidos";
         private static string ext = ".csv";
-        private List<Models.PedidoModel> pedidos = new List<Models.PedidoModel>();
-        
+        //private List<Models.PedidoModel> pedidos = new List<Models.PedidoModel>();
+        private readonly ILogger<PedidoController> _logger;
+        private readonly IMapper _mapper;
+
+        public PedidoController(ILogger<PedidoController> logger, IMapper mapper)
+        {
+            _logger = logger;
+            _mapper = mapper;
+        }
+
         public IActionResult Index()
         {
             helper help = new helper(path, ext);
-            pedidos = help.pedidosAlmacenados();
-            return View(pedidos);
+            var pedidos = help.pedidosAlmacenados();
+            var pedidosViewModel = _mapper.Map<List<PedidoViewModel>>(pedidos);
+            return View(pedidosViewModel);
         }
 
+        [HttpGet]
         public IActionResult IngresaPedido()
         {
             return View();
@@ -32,8 +44,9 @@ namespace Cadeteria.Controllers
                 ultimoPedido = pedido.getNroPedido();
             }
             help.agregaPedido(new PedidoModel(ultimoPedido + 1, observacion, datosExtraDireccion, nombre, direccion, telefono, estado));
-            pedidos = help.pedidosAlmacenados();
-            return View("Index", pedidos);
+            var pedidos = help.pedidosAlmacenados();
+            var pedidosViewModel = _mapper.Map<List<PedidoViewModel>>(pedidos);
+            return View("Index", pedidosViewModel);
         }
     }
 }

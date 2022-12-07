@@ -1,10 +1,11 @@
-﻿using System.ComponentModel.DataAnnotations;
+﻿using Cadeteria.Models;
+using System.ComponentModel.DataAnnotations;
 
 namespace Cadeteria.ViewModels.Cadete
 {
     public class CadeteViewModel
     {
-        [Required]
+        
         public int id { get; set; }
 
         [Required][StringLength(80)]
@@ -21,12 +22,16 @@ namespace Cadeteria.ViewModels.Cadete
         [Required]
         public float jornalACobrar { get; set; }
 
-        public CadeteViewModel(string nombre, string direccion, string telefono, float jornalACobrar)
+
+        public CadeteViewModel(int id,string nombre, string telefono, float jornalACobrar, string direccion)
         {
+            this.id = id;
             this.nombre = nombre;
             this.direccion = direccion;
             this.telefono = telefono;
             this.jornalACobrar = jornalACobrar;
         }
+
+        public CadeteViewModel() { }
     }
 }

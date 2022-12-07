@@ -10,7 +10,7 @@
         public string direccion;
         private int id;
         private static int autoincremental;
-
+        
         public CadeteModel(string nombre, string telefono, float jornalCobra, string direccion)
         {
             autoincremental++;

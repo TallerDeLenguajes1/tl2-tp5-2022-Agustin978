@@ -1,6 +1,8 @@
 ﻿using Microsoft.AspNetCore.Mvc;
 using System.Web;
 using Cadeteria.Models;
+using AutoMapper;
+using Cadeteria.ViewModels.Cadete;
 
 namespace Cadeteria.Controllers
 {
@@ -8,21 +10,26 @@ namespace Cadeteria.Controllers
     {
         private static string path = @"C:\Cursos\Programacion_UNT\Taller_de_Lenguajes_2\tl2-tp5-2022-Agustin978\Cadeteria\Cadeteria\Archivos\cadetes";
         private static string ext = ".csv";
-        List<CadeteModel> cadetes = new List<CadeteModel>();
-        /*
-        public IActionResult Index()
+        //List<CadeteModel> cadetes = new List<CadeteModel>();
+        private readonly ILogger<CadeteController> _logger;
+        private readonly IMapper _mapper;
+       
+        public CadeteController(ILogger<CadeteController> logger, IMapper mapper)
         {
-            return View();
+            _logger = logger;
+            _mapper = mapper;
         }
-        */
 
         public IActionResult Index()
         {
             helper help = new helper(path, ext);
-            cadetes = help.cadetesAlmacenados();
-            return View(cadetes);
+            var cadetes = help.cadetesAlmacenados();
+            //Mapeado de los datos almacenados
+            var cadetesViewModel = _mapper.Map<List<CadeteViewModel>>(cadetes);
+            return View(cadetesViewModel);
         }
 
+        [HttpGet]
         public IActionResult IngresaCadete()
         {
             //string message = HttpUtility.HtmlEncode("Cadete.creaCadete, nombre:" + nombre + " ID: "+id);
@@ -46,8 +53,9 @@ namespace Cadeteria.Controllers
             }
 
             help.agregaCadete(new CadeteModel(ultimoId+1 ,nombre, telefono, jornalACobrar, direccion));
-            cadetes = help.cadetesAlmacenados();
-            return View("Index", cadetes) ;
+            var cadetes = help.cadetesAlmacenados();
+            var cadetesViewModel = _mapper.Map<List<CadeteViewModel>>(cadetes);
+            return View("Index", cadetesViewModel);
         }
     }
 }
