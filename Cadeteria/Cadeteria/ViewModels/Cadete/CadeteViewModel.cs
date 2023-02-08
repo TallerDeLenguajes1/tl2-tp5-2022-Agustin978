@@ -20,10 +20,10 @@ namespace Cadeteria.ViewModels.Cadete
         public string telefono { get; set; }
 
         [Required]
-        public float jornalACobrar { get; set; }
+        public double jornalACobrar { get; set; }
 
 
-        public CadeteViewModel(int id,string nombre, string telefono, float jornalACobrar, string direccion)
+        public CadeteViewModel(int id,string nombre, string telefono, double jornalACobrar, string direccion)
         {
             this.id = id;
             this.nombre = nombre;

@@ -4,14 +4,14 @@
     {
         private string nombre;
         private string telefono;
-        private float jornalCobra;
+        private double jornalCobra;
         //Debo agregar el listado de pedidos
         private List<int> pedidos = new List<int>();
         public string direccion;
         private int id;
         private static int autoincremental;
         
-        public CadeteModel(string nombre, string telefono, float jornalCobra, string direccion)
+        public CadeteModel(string nombre, string telefono, double jornalCobra, string direccion)
         {
             autoincremental++;
             this.id = autoincremental;
@@ -22,7 +22,7 @@
             //this.pedidos = pedidos;
         }
 
-        public CadeteModel(int id, string nombre, string telefono, float jornalCobra, string direccion)
+        public CadeteModel(int id, string nombre, string telefono, double jornalCobra, string direccion)
         {
             this.id = id;
             this.nombre = nombre;
@@ -63,7 +63,7 @@
             }
         }
 
-        public float getJornal() { return jornalCobra; }
+        public double getJornal() { return jornalCobra; }
         public int getID() { return id; }
         public string getNombre() { return nombre; }
         public string getTelefono() { return telefono; }

@@ -9,11 +9,12 @@ namespace Cadeteria.Repositorio
 
         public override CadeteModel BuscarPorId(int id)
         {
-            string consulta = "SELECT * FROM cadetes WHERE id LIKE @id";
+            string consulta = $"SELECT * FROM cadetes WHERE id LIKE {id}";
             try
             {
                 using(SqliteConnection coneccion = new SqliteConnection(cadenaConecta))
                 {
+                    coneccion.Open();
                     using(SqliteCommand solicitud = new SqliteCommand(consulta, coneccion))
                     {
                         solicitud.Parameters.AddWithValue("@id", id);
@@ -25,6 +26,7 @@ namespace Cadeteria.Repositorio
                                 cadeteEncontrado = new CadeteModel(reader.GetInt32(0), reader.GetString(1), reader.GetString(2), reader.GetFloat(3), reader.GetString(4));
                             }
                         }
+                        coneccion.Close();
                         return cadeteEncontrado;
                     }
                 }
@@ -37,11 +39,12 @@ namespace Cadeteria.Repositorio
 
         public override void Insertar(CadeteModel obj)
         {
-            string consulta = "UPDATE cadetes (id, nombre, direccion, telefono, jornalCobra) values (@id, @nombre, @direccion, @telefono, @jornalCobra)";
+            string consulta = "INSERT INTO cadetes(id, nombre, direccion, telefono, jornalCobra) VALUES(@id, @nombre, @direccion, @telefono, @jornalCobra)";
             try
             {
                 using(SqliteConnection coneccion = new SqliteConnection(cadenaConecta))
                 {
+                    coneccion.Open();
                     using(SqliteCommand solicitud = new SqliteCommand(consulta, coneccion))
                     {
                         solicitud.Parameters.AddWithValue("@id", obj.getID());
@@ -51,6 +54,7 @@ namespace Cadeteria.Repositorio
                         solicitud.Parameters.AddWithValue("@jornalCobra", obj.getJornal());
                         solicitud.ExecuteNonQuery();
                     }
+                    coneccion.Close();
                 }
             }catch(Exception ex)
             {
@@ -60,24 +64,29 @@ namespace Cadeteria.Repositorio
 
         public override List<CadeteModel> listarTodos()
         {
-            string consulta = "SLECT * FROM cadetes";
+            string consulta = "SELECT * FROM cadetes";
             try
             {
+
+                //using var coneccion = new SqliteConnection(cadenaConecta);
+                //var solicitud = new SqliteCommand(consulta, coneccion);
                 using(SqliteConnection conexion = new SqliteConnection(cadenaConecta))
                 {
-                    using(SqliteCommand solicitud = new SqliteCommand(consulta, conexion))
+                    conexion.Open();
+                    SqliteCommand solicitud = new SqliteCommand(consulta, conexion);
+                    
+                    List<CadeteModel> cadetes = new List<CadeteModel>();
+                    using(var reader = solicitud.ExecuteReader())
                     {
-                        List<CadeteModel> cadetes = new List<CadeteModel>();
-                        using(var reader = solicitud.ExecuteReader())
+                        Console.WriteLine(reader.ToString());
+                        while(reader.Read())
                         {
-                            while(reader.Read())
-                            {
-                                CadeteModel cadete = new CadeteModel(reader.GetInt32(0), reader.GetString(1), reader.GetString(2), reader.GetFloat(3), reader.GetString(4));
-                                cadetes.Add(cadete);
-                            }
+                            CadeteModel cadete = new CadeteModel(int.Parse(reader.GetString(0)), reader.GetString(1), reader.GetString(2), float.Parse(reader.GetString(3)), reader.GetString(4));
+                            cadetes.Add(cadete);
                         }
-                        return cadetes;
                     }
+                    conexion.Close();
+                    return cadetes;
                 }
             }catch(Exception ex)
             {

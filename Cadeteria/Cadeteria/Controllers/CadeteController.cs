@@ -27,7 +27,7 @@ namespace Cadeteria.Controllers
         {
             //helper help = new helper(path, ext);
             //var cadetes = help.cadetesAlmacenados();
-            var cadetes = _repo.listarTodos(); //Enlista todos los cadetes almacenados en la base de datos
+            List<CadeteModel> cadetes = _repo.listarTodos(); //Enlista todos los cadetes almacenados en la base de datos
             //Mapeado de los datos almacenados
             var cadetesViewModel = _mapper.Map<List<CadeteViewModel>>(cadetes); //Los mapeo para pasarlos como CadeteViewModel
             return View(cadetesViewModel);
@@ -42,14 +42,14 @@ namespace Cadeteria.Controllers
         }
 
         [HttpPost]
-        public IActionResult IngresaCadete(string nombre, string telefono, float jornalACobrar, string direccion)
+        public IActionResult IngresaCadete(string nombre, string telefono, double jornalACobrar, string direccion)
         {
             //string path = @"C:\Cursos\Programacion_UNT\Taller_de_Lenguajes_2\tl2-tp5-2022-Agustin978\Cadeteria\Cadeteria\Archivos\cadetes";
             //string ext = ".csv";
             //helper help = new helper(path, ext);
 
             //List<CadeteModel> cadetesCargados = help.cadetesAlmacenados();
-            List<CadeteModel> cadetesCargados = _repo.listarTodos();
+            var cadetesCargados = _repo.listarTodos();
             int ultimoId = 0;
 
             foreach(var cadete in cadetesCargados)
