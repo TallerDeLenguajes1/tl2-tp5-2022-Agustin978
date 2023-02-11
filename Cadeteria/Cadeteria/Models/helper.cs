@@ -50,7 +50,7 @@
                 }
             }
         }
-
+        /*
         public List<PedidoModel> pedidosAlmacenados()
         {
             compruebaCarpeta();
@@ -68,8 +68,9 @@
                 }
             }
             return listaPedidos;
-        }
-
+        }*/
+        
+        /*
         public void agregaPedido(PedidoModel pedido)
         {
             string linea = $"{pedido.getNroPedido()},{pedido.getObservacion()},{pedido.getDatosExtraDireccion()},{pedido.getCliente().getNombre()},{pedido.getCliente().getDireccion()},{pedido.getCliente().getTelefono()},{pedido.getEstado()}\n";
@@ -80,6 +81,7 @@
                     strWriter.Write(linea);
                 }
             }
-        }  
+        }
+        */
     }
 }

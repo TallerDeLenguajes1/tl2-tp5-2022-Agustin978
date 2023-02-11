@@ -5,7 +5,7 @@ namespace Cadeteria.ViewModels.Cadete
 {
     public class CadeteViewModel
     {
-        
+        [Required]
         public int id { get; set; }
 
         [Required][StringLength(80)]

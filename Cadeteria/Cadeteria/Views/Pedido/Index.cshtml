@@ -15,7 +15,6 @@
           <th scope="col">NroPedido</th>
           <th scope="col">Observacion</th>
           <th scope="col">Datos extra dir</th>
-          <th scope="col">Nombre Cliente</th>
           <th scope="col">Estado</th>
           <th scope="col"></th>
         </tr>
@@ -28,7 +27,6 @@
                     <th scope="row">@item.nroPedido</th>
                     <td>@item.observacion</td>
                     <td>@item.datosdatosExtraDireccion</td>
-                    <td>@item.cliente.getNombre()</td>
                     <td>@item.estado</td>
                     <td><a class="btn-info btn-danger btn-lg" asp-action="">Eliminar Pedido</a></td>
                 </tr>
