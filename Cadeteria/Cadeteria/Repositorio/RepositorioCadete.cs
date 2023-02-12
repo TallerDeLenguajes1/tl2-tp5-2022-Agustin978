@@ -78,7 +78,7 @@ namespace Cadeteria.Repositorio
                     List<CadeteModel> cadetes = new List<CadeteModel>();
                     using(var reader = solicitud.ExecuteReader())
                     {
-                        Console.WriteLine(reader.ToString());
+                        //Console.WriteLine(reader.ToString());
                         while(reader.Read())
                         {
                             CadeteModel cadete = new CadeteModel(int.Parse(reader.GetString(0)), reader.GetString(1), reader.GetString(2), float.Parse(reader.GetString(3)), reader.GetString(4));

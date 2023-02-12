@@ -78,7 +78,7 @@ namespace Cadeteria.Repositorio
                         {
                             while(reader.Read())
                             {
-                                PedidoModel pedido = new PedidoModel(reader.GetInt32(0), reader.GetString(1), reader.GetString(2), reader.GetString(3), reader.GetInt32(4), reader.GetInt32(5));
+                                PedidoModel pedido = new PedidoModel(int.Parse(reader.GetString(0)), reader.GetString(1), reader.GetString(2), reader.GetString(3), int.Parse(reader.GetString(4)), int.Parse(reader.GetString(5)));
                                 pedidos.Add(pedido);
                             }
                         }

@@ -1,6 +1,7 @@
 ﻿using AutoMapper;
 using Cadeteria.Models;
 using Cadeteria.ViewModels.Pedido;
+using Cadeteria.ViewModels.Cadete;
 using Microsoft.AspNetCore.Mvc;
 using Cadeteria.Repositorio;
 
@@ -38,7 +39,7 @@ namespace Cadeteria.Controllers
         public IActionResult IngresaPedido()
         {
             List<CadeteModel> cadetesCargados = _repoCad.listarTodos();
-            var cadetesViewModel = _mapper.Map<List<PedidoViewModel>>(cadetesCargados);
+            var cadetesViewModel = _mapper.Map<List<CadeteViewModel>>(cadetesCargados);
             return View(cadetesViewModel);
         }
         

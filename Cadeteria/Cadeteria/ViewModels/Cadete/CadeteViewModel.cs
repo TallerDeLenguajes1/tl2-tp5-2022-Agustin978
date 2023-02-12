@@ -15,7 +15,7 @@ namespace Cadeteria.ViewModels.Cadete
         public string direccion { get; set; }
 
         [Required]
-        [StringLength(100)]
+        [StringLength(20)]
         [Phone]
         public string telefono { get; set; }
 
